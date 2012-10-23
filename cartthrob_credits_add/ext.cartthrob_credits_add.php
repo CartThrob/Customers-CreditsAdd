@@ -13,7 +13,7 @@ class Cartthrob_credits_add_ext
 	public $name = 'CartThrob - Adds credits';
 	public $version = '1.0.0';
 	public $description = 'Adds credits to a members account based on cart total. Update the conversion rate in the extension settings. Defaults to 100.';
-	public $settings_exist = 'n';
+	public $settings_exist = 'y';
 	public $docs_url = 'http://barrettnewton.com';
  	protected $EE;
 
@@ -34,7 +34,7 @@ class Cartthrob_credits_add_ext
 			array(
 				'class' => __CLASS__,
 				'method' => 'cartthrob_on_authorize',
-				'hook' 	=> 'cartthrob_reports',
+				'hook' 	=> 'cartthrob_on_authorize',
 				'settings' => '',
 				'priority' => 10,
 				'version' => $this->version,
@@ -77,7 +77,7 @@ class Cartthrob_credits_add_ext
 			
 			$credits_per_dollar = sanitize_number($this->settings['credits_per_dollar']); 
  			
-			$total = $this->EE->cartthrob->order('total'); 
+			$total = $this->EE->cartthrob->cart->order('total'); 
 			
 			// if credits have been added to the basket, we'll remove them from the total
 			foreach ( $this->EE->cartthrob->cart->order('items') as $item )
